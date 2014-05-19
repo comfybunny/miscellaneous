@@ -1,9 +1,13 @@
+numberSplit = 0
+
 def countInversions(filename):
     f = open(filename)
     lines = f.read().splitlines()
+    theList = [int(i) for i in lines]
     f.close()
-    toBePrinted = mergeSort(lines)
-    print(toBePrinted)
+    toBePrinted = mergeSort(theList)
+    #print(toBePrinted)
+    print(numberSplit)
     
 def mergeSort(aList):
     if(len(aList)==1):
@@ -24,6 +28,7 @@ def mergeSort(aList):
     
     
 def merge(left, right):
+    global numberSplit
     #print("~~~ONE THING~~~")  
     #print("left:  ", left)  
     #print("right:  ", right)  
@@ -39,14 +44,13 @@ def merge(left, right):
             sortedList.append(right[j])
             #print("ADDING RIGHT:  ", right[j])  
             j+=1
-
+            numberSplit+=len(left[i:])
     #this is the case that all of the left has been added but not the right
     if(i==len(left) and j < len(right)):
         while j<len(right):
             sortedList.append(right[j])
             #print("ADDING RIGHT:  ", right[j])  
             j+=1
-            
     #this is the case that all of the right has been added but not the left
     elif(j==len(right) and i<len(left)):
         while i<len(left):
@@ -60,5 +64,6 @@ def merge(left, right):
 countInversions('C:\\Users\\Xialin\\Documents\\AlgoCoursera\\IntegerArray.txt')
 
 
-# toPrint = mergeSort([3,2,1,6])
-# #print(toPrint)
+#toPrint = mergeSort([3,2,1,6])
+#print(toPrint)
+#print(numberSplit)
