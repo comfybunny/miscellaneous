@@ -1,0 +1,64 @@
+def countInversions(filename):
+    f = open(filename)
+    lines = f.read().splitlines()
+    f.close()
+    toBePrinted = mergeSort(lines)
+    print(toBePrinted)
+    
+def mergeSort(aList):
+    if(len(aList)==1):
+        return aList
+    center = len(aList)/2
+    #print("center:   ", center)
+    leftHalf = aList[:center]
+    #print("leftHalf:  ", leftHalf)
+    rightHalf = aList[center:]
+    #print("rightHalf:  ", rightHalf)
+    sortedLeft = mergeSort(leftHalf)
+    #print("sortedLeft:  ", sortedLeft)  
+    sortedRight = mergeSort(rightHalf)
+    #print("sortedRight:  ", sortedRight)  
+    finalSortedList = merge(sortedLeft,sortedRight)
+    #print(finalSortedList)
+    return finalSortedList
+    
+    
+def merge(left, right):
+    #print("~~~ONE THING~~~")  
+    #print("left:  ", left)  
+    #print("right:  ", right)  
+    i = 0;
+    j = 0;
+    sortedList = []
+    while i<len(left) and j<len(right):
+        if(left[i]<right[j]):
+            sortedList.append(left[i])
+            #print("ADDING LEFT:  ", left[i])  
+            i+=1
+        else:
+            sortedList.append(right[j])
+            #print("ADDING RIGHT:  ", right[j])  
+            j+=1
+
+    #this is the case that all of the left has been added but not the right
+    if(i==len(left) and j < len(right)):
+        while j<len(right):
+            sortedList.append(right[j])
+            #print("ADDING RIGHT:  ", right[j])  
+            j+=1
+            
+    #this is the case that all of the right has been added but not the left
+    elif(j==len(right) and i<len(left)):
+        while i<len(left):
+            sortedList.append(left[i])
+            #print("ADDING LEFT:  ", left[i])  
+            i+=1
+    #print("sortedList:  ", sortedList)
+    #print("~~~ONE THING END~~~")  
+    return sortedList
+        
+countInversions('C:\\Users\\Xialin\\Documents\\AlgoCoursera\\IntegerArray.txt')
+
+
+# toPrint = mergeSort([3,2,1,6])
+# #print(toPrint)
